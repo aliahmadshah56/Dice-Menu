@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:dice/widgets/dice/Dice1.dart';
 import 'package:dice/widgets/dice/Dice2.dart';
 
+import 'dice/Dice3.dart';
 import 'dice/Dicen.dart';
 
 class Numberdices extends StatelessWidget {
@@ -10,17 +11,17 @@ class Numberdices extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
+      scrollDirection: Axis.vertical,
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-        child: Row(
+        child: Column(
           children: [
 //For 1 dice
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 7),
+              padding: EdgeInsets.symmetric(vertical: 7),
               child: Container(
-                width: 170,
-                height: 240,
+                width: 400,
+                height: 170,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
@@ -34,7 +35,7 @@ class Numberdices extends StatelessWidget {
                     ]),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Column(
+                  child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
@@ -63,10 +64,10 @@ class Numberdices extends StatelessWidget {
             ),
 //For Two Dice
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 7),
+              padding: EdgeInsets.symmetric(vertical: 7),
               child: Container(
-                width: 170,
-                height: 240,
+                width: 400,
+                height: 170,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
@@ -80,7 +81,7 @@ class Numberdices extends StatelessWidget {
                     ]),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Column(
+                  child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
@@ -107,12 +108,13 @@ class Numberdices extends StatelessWidget {
                 ),
               ),
             ),
-//For n dices
+
+//For Three Dice
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 7),
+              padding: EdgeInsets.symmetric(vertical: 7),
               child: Container(
-                width: 170,
-                height: 240,
+                width: 400,
+                height: 170,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
@@ -126,7 +128,54 @@ class Numberdices extends StatelessWidget {
                     ]),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Column(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Dice3()));
+                          },
+                          child: Image.asset(
+                            'images/dicen.png',
+                            height: 150,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        'Three Dices',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+//For n dices
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 7),
+              child: Container(
+                width: 400,
+                height: 170,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 3,
+                        blurRadius: 10,
+                        offset: Offset(0, 3),
+                      )
+                    ]),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
@@ -138,7 +187,7 @@ class Numberdices extends StatelessWidget {
                                     builder: (context) => Dicen()));
                           },
                           child: Image.asset(
-                            'images/dicen.png',
+                            'images/dicenn.png',
                             height: 150,
                           ),
                         ),

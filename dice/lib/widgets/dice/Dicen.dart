@@ -37,11 +37,10 @@ class _DiceAppState extends State<Dicen> {
   void reset() {
     setState(() {
       diceValues = List.generate(2, (_) => 1);
-      numDice = 1;
+      numDice = 2;
       totalSum = 0;
       rollCount = 0;
       cumulativeSum = 0;
-      maxRolls=0;
     });
   }
 
@@ -234,7 +233,6 @@ class _DiceAppState extends State<Dicen> {
                 },
               ),
             ),
-            SizedBox(height: 30),
             Text(
               'Currently Sum = $totalSum',
               style: TextStyle(
@@ -258,7 +256,7 @@ class _DiceAppState extends State<Dicen> {
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 10),
             InkWell(
               onTap: reset,
               child: Container(

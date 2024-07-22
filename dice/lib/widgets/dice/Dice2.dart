@@ -20,7 +20,6 @@ class DiceState extends State<Dice2> {
       if (c1 < count) {
         diceNumber1 = Random().nextInt(6) + 1;
         sum1 += diceNumber1;
-        c1++;
       }
     });
   }
@@ -30,10 +29,13 @@ class DiceState extends State<Dice2> {
       if (c1 < count) {
         diceNumber2 = Random().nextInt(6) + 1;
         sum2 += diceNumber2;
-        c1++;
        }
     }
       );
+
+  }
+  void clicks(){
+    c1++;
   }
 
   void total() {
@@ -45,20 +47,19 @@ class DiceState extends State<Dice2> {
       c1 = 0;
       sum1 = 0;
       sum2 = 0;
-      count = 0;
       t=0;
     });
   }
 
   void counter() {
     setState(() {
-      count = count + 2;
+      count = count + 1;
     });
   }
 
   void dec() {
     setState(() {
-      count = count - 2;
+      count = count - 1;
     });
   }
 
@@ -153,6 +154,7 @@ class DiceState extends State<Dice2> {
                     onTap: () {
                       rollDice1();
                       rollDice2();
+                      clicks();
                       total();
                     },
                     child: Image.asset(
@@ -169,6 +171,7 @@ class DiceState extends State<Dice2> {
                     onTap: () {
                       rollDice1();
                       rollDice2();
+                      clicks();
                       total();
                     },
                     child: Image.asset(

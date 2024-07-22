@@ -1,44 +1,76 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-class Dice1 extends StatefulWidget {
+class Dice3 extends StatefulWidget {
   @override
   DiceState createState() => DiceState();
 }
 
-class DiceState extends State<Dice1> {
+class DiceState extends State<Dice3> {
   int diceNumber1 = 1;
-  int sum1 = 0;
+  int diceNumber2 = 3;
+  int diceNumber3 = 2;
+  int sum1 = 0, sum2 = 0,sum3=0;
   int c1 = 0;
   int a = 0;
   int count = 0;
+  int t = 0;
 
   void rollDice1() {
     setState(() {
       if (c1 < count) {
         diceNumber1 = Random().nextInt(6) + 1;
         sum1 += diceNumber1;
-        c1++;
       }
     });
+  }
+
+  void rollDice2() {
+    setState(() {
+      if (c1 < count) {
+        diceNumber2 = Random().nextInt(6) + 1;
+        sum2 += diceNumber2;
+      }
+    }
+    );
+  }
+
+  void rollDice3() {
+    setState(() {
+      if (c1 < count) {
+        diceNumber3 = Random().nextInt(6) + 1;
+        sum3 += diceNumber3;
+      }
+    }
+    );
+  }
+  void clicks(){
+    c1++;
+  }
+
+  void total() {
+    t = sum1 + sum2+ sum3;
   }
 
   void reset() {
     setState(() {
       c1 = 0;
       sum1 = 0;
+      sum2 = 0;
+      sum3 = 0;
+      t=0;
     });
   }
 
   void counter() {
     setState(() {
-      count++;
+      count = count + 1;
     });
   }
 
   void dec() {
     setState(() {
-      count--;
+      count = count - 1;
     });
   }
 
@@ -48,7 +80,7 @@ class DiceState extends State<Dice1> {
       appBar: AppBar(
         title: Text(
           'Dice App',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
       ),
       body: Center(
@@ -122,7 +154,7 @@ class DiceState extends State<Dice1> {
                 ),
               ],
             ),
-            SizedBox(height: 40),
+            SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -132,9 +164,55 @@ class DiceState extends State<Dice1> {
                   child: GestureDetector(
                     onTap: () {
                       rollDice1();
+                      rollDice2();
+                      rollDice3();
+                      clicks();
+                      total();
                     },
                     child: Image.asset(
                       'images/d$diceNumber1.png',
+                      height: 150,
+                      width: 150,
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 200,
+                  width: 200,
+                  child: GestureDetector(
+                    onTap: () {
+                      rollDice1();
+                      rollDice2();
+                      rollDice3();
+                      total();
+                      clicks();
+                    },
+                    child: Image.asset(
+                      'images/d$diceNumber2.png',
+                      height: 150,
+                      width: 150,
+                    ),
+                  ),
+                ),
+
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 200,
+                  width: 200,
+                  child: GestureDetector(
+                    onTap: () {
+                      rollDice1();
+                      rollDice2();
+                      rollDice3();
+                      total();
+                      clicks();
+                    },
+                    child: Image.asset(
+                      'images/d$diceNumber3.png',
                       height: 150,
                       width: 150,
                     ),
@@ -153,7 +231,7 @@ class DiceState extends State<Dice1> {
                 ),
                 Container(
                   child: Text(
-                    'Total =$sum1 ',
+                    'Total =$t',
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 20,
@@ -162,7 +240,7 @@ class DiceState extends State<Dice1> {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 30),
             Padding(
                 padding: EdgeInsets.symmetric(
                   vertical: 30.0,
