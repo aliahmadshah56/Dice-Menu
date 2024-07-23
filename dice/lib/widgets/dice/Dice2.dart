@@ -6,7 +6,8 @@ class Dice2 extends StatefulWidget {
   DiceState createState() => DiceState();
 }
 
-class DiceState extends State<Dice2> {
+class DiceState extends State<Dice2> with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
   int diceNumber1 = 1;
   int diceNumber2 = 3;
   int sum1 = 0, sum2 = 0;
@@ -15,26 +16,46 @@ class DiceState extends State<Dice2> {
   int count = 0;
   int t = 0;
 
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 200),
+    );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
   void rollDice1() {
-    setState(() {
-      if (c1 < count) {
-        diceNumber1 = Random().nextInt(6) + 1;
-        sum1 += diceNumber1;
-      }
+    _animationController.forward(from: 0).then((_) {
+      setState(() {
+        if (c1 < count) {
+          diceNumber1 = Random().nextInt(6) + 1;
+          sum1 += diceNumber1;
+        }
+      });
+      _animationController.reverse(from: 1);
     });
   }
 
   void rollDice2() {
-    setState(() {
-      if (c1 < count) {
-        diceNumber2 = Random().nextInt(6) + 1;
-        sum2 += diceNumber2;
-       }
-    }
-      );
-
+    _animationController.forward(from: 0).then((_) {
+      setState(() {
+        if (c1 < count) {
+          diceNumber2 = Random().nextInt(6) + 1;
+          sum2 += diceNumber2;
+        }
+      });
+      _animationController.reverse(from: 1);
+    });
   }
-  void clicks(){
+
+  void clicks() {
     c1++;
   }
 
@@ -47,7 +68,7 @@ class DiceState extends State<Dice2> {
       c1 = 0;
       sum1 = 0;
       sum2 = 0;
-      t=0;
+      t = 0;
     });
   }
 
@@ -154,14 +175,21 @@ class DiceState extends State<Dice2> {
                     onTap: () {
                       rollDice1();
                       rollDice2();
-                      clicks();
                       total();
+                      clicks();
                     },
-                    child: Image.asset(
-                      'images/d$diceNumber1.png',
-                      height: 150,
-                      width: 150,
-                    ),
+                    child: AnimatedBuilder(
+                        animation: _animationController,
+                        builder: (context, child) {
+                          return Transform.rotate(
+                            angle: _animationController.value * pi,
+                            child: Image.asset(
+                              'images/d$diceNumber1.png',
+                              height: 150,
+                              width: 150,
+                            ),
+                          );
+                        }),
                   ),
                 ),
                 Container(
@@ -171,14 +199,21 @@ class DiceState extends State<Dice2> {
                     onTap: () {
                       rollDice1();
                       rollDice2();
-                      clicks();
                       total();
+                      clicks();
                     },
-                    child: Image.asset(
-                      'images/d$diceNumber2.png',
-                      height: 150,
-                      width: 150,
-                    ),
+                    child: AnimatedBuilder(
+                        animation: _animationController,
+                        builder: (context, child) {
+                          return Transform.rotate(
+                            angle: _animationController.value * pi,
+                            child: Image.asset(
+                              'images/d$diceNumber2.png',
+                              height: 150,
+                              width: 150,
+                            ),
+                          );
+                        }),
                   ),
                 ),
               ],
